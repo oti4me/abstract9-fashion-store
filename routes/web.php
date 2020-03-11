@@ -18,5 +18,3 @@ Route::get('/', 'HomeController@index')->name('home');
 require 'user.php';
 require 'admin.php';
 require 'vendor.php';
-
-Auth::routes();

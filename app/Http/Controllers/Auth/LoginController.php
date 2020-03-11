@@ -3,31 +3,17 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Providers\RouteServiceProvider;
-use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\Http\Requests\LoginRequest;
+use App\Repositories\UserRepository;
+use Illuminate\Contracts\View\Factory;
+use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
+use Illuminate\Routing\Redirector;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\View\View;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
-    use AuthenticatesUsers;
-
-    /**
-     * Where to redirect users after login.
-     *
-     * @var string
-     */
-    protected $redirectTo = RouteServiceProvider::HOME;
-
     /**
      * Create a new controller instance.
      *
@@ -36,5 +22,51 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+    }
+
+    /**
+     * Show login form form
+     *
+     * @param Request $request
+     * @return Factory|View
+     */
+    public function loginForm(Request $request)
+    {
+        return view('user.login');
+    }
+
+    /**
+     * Logs a user into the application
+     *
+     * @param LoginRequest $request
+     * @return RedirectResponse
+     */
+    public function login(LoginRequest $request)
+    {
+        ['email' => $email, 'password' => $password] = $request->only('email', 'password');
+
+        $user = UserRepository::getUserByEmail($email);
+
+        if (!$user || !Hash::check($password, $user->password))
+            return back()->with('login-error', 'Email or Password incorrect');
+
+        auth()->login($user);
+
+        return redirect()->intended(route('user.profile'));
+    }
+
+    /**
+     * Logs a user out of the application
+     *
+     * @param Request $request
+     * @return RedirectResponse|Redirector
+     */
+    public function logout(Request $request)
+    {
+        session()->flush();
+
+        auth()->logout();
+
+        return redirect()->route('home');
     }
 }

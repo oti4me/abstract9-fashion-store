@@ -63,7 +63,15 @@
                             <li><a href=""><i class="fa fa-star"></i> Wishlist</a></li>
                             <li><a href="{{ route('home') }}"><i class="fa fa-crosshairs"></i> Checkout</a></li>
                             <li><a href="{{ route('home') }}"><i class="fa fa-shopping-cart"></i> Cart</a></li>
-                            <li><a href="{{ route('home') }}"><i class="fa fa-lock"></i> Login</a></li>
+
+                            @if (!auth()->check())
+                                <li><a href="{{ route('user.login.show') }}"><i class="fa fa-lock"></i> Login</a></li>
+                            @else
+                                <li><a href="{{ route('user.logout') }}"><i class="fa fa-lock"></i> Logout</a></li>
+                            @endif
+
+
+
                         </ul>
                     </div>
                 </div>
