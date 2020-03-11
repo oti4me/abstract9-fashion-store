@@ -4,18 +4,17 @@
 namespace Tests\Feature\Controllers;
 
 
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use App\Models\User;
 use App\Repositories\UserRepository;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
-use Mockery;
 use Tests\TestCase;
 
 class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_can_authenticate()
+    public function test_can_authenticate_a_user()
     {
         $password = "testpass123";
 
@@ -32,8 +31,19 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post('/login', $userDetails)
-            ->assertSessionHasNoErrors()
             ->assertRedirect(route('user.profile'));
+
+        $this->assertTrue(auth()->check());
+
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_can_sign_out_a_user()
+    {
+        $this->get('/logout')
+            ->assertRedirect(route('home'));
+
+        $this->assertFalse(auth()->check());
     }
 
 }
