@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\SignupRequest;
+use App\Http\Requests\SignupFormRequest;
 use App\Providers\RouteServiceProvider;
 use App\Repositories\UserRepository;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -44,10 +44,10 @@ class RegisterController extends Controller
     /**
      * Registers a user on the app given a user's credentials.
      *
-     * @param SignupRequest $request
+     * @param SignupFormRequest $request
      * @return RedirectResponse
      */
-    public function register(SignupRequest $request)
+    public function register(SignupFormRequest $request)
     {
         $userDetails = $request->only(['first_name', 'last_name', 'email', 'password']);
 

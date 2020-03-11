@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\LoginRequest;
+use App\Http\Requests\LoginFormRequest;
 use App\Repositories\UserRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\RedirectResponse;
@@ -38,10 +38,10 @@ class LoginController extends Controller
     /**
      * Logs a user into the application
      *
-     * @param LoginRequest $request
+     * @param LoginFormRequest $request
      * @return RedirectResponse
      */
-    public function login(LoginRequest $request)
+    public function login(LoginFormRequest $request)
     {
         ['email' => $email, 'password' => $password] = $request->only('email', 'password');
 
