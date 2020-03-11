@@ -4,12 +4,26 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
+        environment:
+          APP_ENV: testing
+          POSTGRES_PASSWORD: secret
+          POSTGRES_USER: postgres
+          DB_CONNECTION: pgsql
+          DB_HOST: 127.0.0.1
+          CACHE_DRIVER: file
+          APP_KEY: base64:vSPnIS7mqyGVPmFPbcG9ZZQDgUUl0r3qdvaS/P4HPVg=
+          DB_DATABASE: circle_test
+          DB_USERNAME: ubuntu
+          DB_PASSWORD: ""
+
       - image: circleci/postgres:10.6-ram
+        environment:
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
+          POSTGRES_PASSWORD: ""
+
     working_directory: ~/app
-    environment:
-      - APP_ENV: testing
-      - POSTGRES_PASSWORD: secret
-      - POSTGRES_USER: postgres
+
     steps:
       - checkout
       - run: sudo apt-get install -y libpq-dev
