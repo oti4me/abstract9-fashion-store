@@ -1,0 +1,43 @@
+version: 2
+
+jobs:
+  build:
+    docker:
+      - image: circleci/php:7.3-node-browsers
+    working_directory: ~/app
+    environment:
+      - APP_ENV: testing
+    steps:
+      - checkout
+      - run: sudo apt-get install -y libpq-dev
+      - run: sudo docker-php-ext-configure pgsql -with-pgsql=/usr/local/pgsql
+      - run: sudo docker-php-ext-install pdo pdo_pgsql pgsql
+      - run: sudo apt-get install -y libfreetype6-dev libjpeg62-turbo-dev libpng-dev && sudo docker-php-ext-configure gd --with-freetype-dir=/usr/include/ --with-jpeg-dir=/usr/include/ && sudo -E docker-php-ext-install -j$(nproc) gd
+      - add_ssh_keys:
+          fingerprints:
+            - ""
+      - restore_cache:
+          keys:
+            - composer-v1-{{ checksum "composer.lock" }}
+            - compose-v1-
+      - run: composer install --no-interaction
+      - save_cache:
+          key: composer-v1-{{ checksum "composer.lock" }}
+          paths:
+            - vendor
+      - restore_cache:
+          keys:
+            - node-v1-{{ checksum "package.json" }}
+            - node-v1-
+      - run: yarn install
+      - run: yarn run dev
+      - save_cache:
+          key: node-v1-{{ checksum "package.json" }}
+          paths:
+            - node_modules
+
+      # prepare the database
+      - run: touch storage/testing.sqlite
+      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+
+      - run: vendor/bin/phpunit
