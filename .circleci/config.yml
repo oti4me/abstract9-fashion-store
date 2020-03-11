@@ -4,9 +4,12 @@ jobs:
   build:
     docker:
       - image: circleci/php:7.3-node-browsers
+      - image: circleci/postgres:10.6-ram
     working_directory: ~/app
     environment:
       - APP_ENV: testing
+      - POSTGRES_PASSWORD: secret
+      - POSTGRES_USER: postgres
     steps:
       - checkout
       - run: sudo apt-get install -y libpq-dev
@@ -37,7 +40,6 @@ jobs:
             - node_modules
 
       # prepare the database
-      - run: touch storage/testing.sqlite
-      - run: php artisan migrate --env=testing --database=sqlite_testing --force
+      - run: php artisan migrate:fresh
 
       - run: vendor/bin/phpunit
