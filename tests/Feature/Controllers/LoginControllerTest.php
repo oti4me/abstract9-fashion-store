@@ -25,12 +25,12 @@ class LoginControllerTest extends TestCase
             ->with($user->email)
             ->andReturn($user);
 
-        $userDetails = [
+        $loginDetails = [
             'email' => $user->email,
             'password' => $password,
         ];
 
-        $this->post('/login', $userDetails)
+        $this->post('/login', $loginDetails)
             ->assertRedirect(route('user.profile'));
 
         $this->assertTrue(auth()->check());
@@ -42,6 +42,24 @@ class LoginControllerTest extends TestCase
     {
         $this->get('/logout')
             ->assertRedirect(route('home'));
+
+        $this->assertFalse(auth()->check());
+    }
+
+    public function test_can_view_login_form()
+    {
+        $this->get(route('user.login.form'))
+            ->assertStatus(200);
+
+        $this->assertFalse(auth()->check());
+    }
+
+    public function test_can_not_login_with_unregistered_user_details()
+    {
+        session()->start();
+
+        $this->post(route('user.login'), ['email' => 'nouser@example.com', 'password' => 'thisisamerica'])
+            ->assertSessionHas('login-error', 'Email or Password incorrect');
 
         $this->assertFalse(auth()->check());
     }

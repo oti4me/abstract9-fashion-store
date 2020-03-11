@@ -53,9 +53,6 @@ class RegisterController extends Controller
 
         $user = UserRepository::createUser($userDetails);
 
-        if (!$user)
-            return back()->with('error', 'There is an error creating your account, please try again later');
-
         auth()->login($user);
 
         return redirect()->intended(route('user.profile'));
