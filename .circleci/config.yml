@@ -7,8 +7,9 @@ jobs:
       - image: circleci/postgres:10.6-ram
         environment:
           APP_ENV: testing
-          POSTGRES_PASSWORD: secret
-          POSTGRES_USER: postgres
+          POSTGRES_USER: ubuntu
+          POSTGRES_DB: circle_test
+          POSTGRES_PASSWORD: ""
           APP_KEY: base64:vSPnIS7mqyGVPmFPbcG9ZZQDgUUl0r3qdvaS/P4HPVg=
           CC_TEST_REPORTER_ID: 10a9c9d794a1deb68f8c4756e964d4dc641441b45517f202af589a3816d0f371
 
