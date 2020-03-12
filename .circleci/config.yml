@@ -44,9 +44,6 @@ jobs:
           paths:
             - node_modules
 
-      # prepare the database
-      - run: php artisan migrate:fresh
-
       - run:
           name: Setup Code Climate test-reporter
           command: |
