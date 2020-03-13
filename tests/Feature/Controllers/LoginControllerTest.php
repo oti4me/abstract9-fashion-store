@@ -14,11 +14,11 @@ class LoginControllerTest extends TestCase
 {
     use RefreshDatabase;
 
-    public function test_can_authenticate_a_user()
+    public function test_can_authenticate_a_customer()
     {
         $password = "testpass123";
 
-        $user = factory(User::class)->create(['password' => Hash::make($password)]);
+        $user = factory(User::class)->create(['password' => Hash::make($password), 'user_type' => 1]);
 
         $this->mock(UserRepository::class)
             ->shouldReceive('getUserByEmail')
@@ -31,7 +31,31 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post('/login', $loginDetails)
-            ->assertRedirect(route('user.profile'));
+            ->assertRedirect(route('customer.profile'));
+
+        $this->assertTrue(auth()->check());
+
+        $this->assertAuthenticatedAs($user);
+    }
+
+    public function test_can_authenticate_a_vendor()
+    {
+        $password = "testpass123";
+
+        $user = factory(User::class)->create(['password' => Hash::make($password), 'user_type' => 2]);
+
+        $this->mock(UserRepository::class)
+            ->shouldReceive('getUserByEmail')
+            ->with($user->email)
+            ->andReturn($user);
+
+        $loginDetails = [
+            'email' => $user->email,
+            'password' => $password,
+        ];
+
+        $this->post('/login', $loginDetails)
+            ->assertRedirect(route('vendor.profile'));
 
         $this->assertTrue(auth()->check());
 
