@@ -46,6 +46,10 @@
                                 <input type="text" placeholder="Last Name" name="last_name" value="{{ old('last_name') }}" />
                                 <input type="email" placeholder="Email Address" name="email" value="{{ old('email') }}" />
                                 <input type="password" placeholder="Password" name="password" value="{{ old('password') }}" />
+                                <span>
+								    <input type="checkbox" class="checkbox" name="is_vendor">
+								    I am a vendor
+							    </span>
                                 <button type="submit" class="btn btn-default">Signup</button>
                             </form>
                         </div><!--/sign up form-->

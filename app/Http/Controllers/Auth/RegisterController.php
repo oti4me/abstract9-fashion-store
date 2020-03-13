@@ -49,12 +49,14 @@ class RegisterController extends Controller
      */
     public function register(SignupFormRequest $request)
     {
-        $userDetails = $request->only(['first_name', 'last_name', 'email', 'password']);
+        $userDetails = $request->only(['first_name', 'last_name', 'email', 'password', 'is_vendor']);
 
         $user = UserRepository::createUser($userDetails);
 
         auth()->login($user);
 
-        return redirect()->intended(route('user.profile'));
+        $userType = strtolower($user->getType());
+
+        return redirect()->intended(route("$userType.profile"));
     }
 }

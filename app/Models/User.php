@@ -2,8 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
-use Illuminate\Database\Eloquent\Relations\MorphTo;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -17,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'email', 'password', 'userable_id', 'userable_type',
+        'first_name', 'last_name', 'email', 'password', 'user_type',
     ];
 
     /**
@@ -39,10 +37,9 @@ class User extends Authenticatable
     ];
 
     /**
-     * @return MorphTo
+     * @return string|null
      */
-    public function userable()
-    {
-        return $this->morphTo();
+    public function getType() {
+        return UserType::get($this->user_type);
     }
 }

@@ -3,6 +3,7 @@
 namespace App\Repositories;
 
 use App\Models\User;
+use App\Models\UserType;
 use Illuminate\Support\Facades\Hash;
 
 class UserRepository
@@ -32,6 +33,7 @@ class UserRepository
             'last_name' => $data['last_name'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
+            'user_type' => isset($data['is_vendor']) ? UserType::VENDOR : UserType::CUSTOMER,
         ]);
     }
 
