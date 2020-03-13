@@ -5,7 +5,6 @@ namespace Tests\Feature\Controllers;
 
 
 use App\Models\Admin;
-use App\Repositories\AdminRepository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Hash;
 use Tests\TestCase;

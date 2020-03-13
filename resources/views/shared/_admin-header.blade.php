@@ -4,8 +4,10 @@
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
             <a class="nav-link" href="{{ route('admin.logout') }}">
-                @if(!auth()->check())
+                @if(auth()->guard('admin')->check())
                     Sign out
+                @else
+                    Sign In
                 @endif
             </a>
         </li>

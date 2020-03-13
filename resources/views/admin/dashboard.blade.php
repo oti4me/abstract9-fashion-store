@@ -19,42 +19,34 @@
                 </div>
             </div>
 
-            <canvas class="my-4 w-100" id="myChart" width="900" height="380"></canvas>
+            <canvas class="my-4 w-100" id="myChart" width="900" height="200"></canvas>
 
-            <h2>Section title</h2>
+            <h2>New Products</h2>
             <div class="table-responsive">
                 <table class="table table-striped table-sm">
                     <thead>
                     <tr>
                         <th>#</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
-                        <th>Header</th>
+                        <th>Title</th>
+                        <th>Description</th>
+                        <th>Price</th>
+                        <th>Actions</th>
                     </tr>
                     </thead>
                     <tbody>
-                    <tr>
-                        <td>{{ four_digits(1) }}</td>
-                        <td>Lorem</td>
-                        <td>ipsum</td>
-                        <td>dolor</td>
-                        <td>sit</td>
-                    </tr>
-                    <tr>
-                        <td>1,002</td>
-                        <td>amet</td>
-                        <td>consectetur</td>
-                        <td>adipiscing</td>
-                        <td>elit</td>
-                    </tr>
-                    <tr>
-                        <td>1,003</td>
-                        <td>Integer</td>
-                        <td>nec</td>
-                        <td>odio</td>
-                        <td>Praesent</td>
-                    </tr>
+                        @if(isset($products) && count($products))
+                            @foreach($products as $product)
+                                <tr>
+                                    <td>{{ four_digits($product->id) }}</td>
+                                    <td>{{ $product->title }}</td>
+                                    <td>{{ $product->description }}</td>
+                                    <td>{{ $product->price }}</td>
+                                    <td>DELETE</td>
+                                </tr>
+                            @endforeach
+                        @else
+                            No products to display :)
+                        @endif
                     </tbody>
                 </table>
             </div>
