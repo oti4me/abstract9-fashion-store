@@ -12,14 +12,6 @@ use ReflectionException;
 trait InteractsWithClassConstants
 {
     /**
-     * @return Collection
-     */
-    public static function all() : Collection
-    {
-        return (new self())->extractConstantsAsKeyValue();
-    }
-
-    /**
      * @param $key
      * @return string
      */
