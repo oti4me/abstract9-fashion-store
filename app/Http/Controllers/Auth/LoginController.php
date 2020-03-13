@@ -52,7 +52,9 @@ class LoginController extends Controller
 
         auth()->login($user);
 
-        return redirect()->intended(route('user.profile'));
+        $userType = strtolower($user->getType());
+
+        return redirect()->intended(route("$userType.profile"));
     }
 
     /**

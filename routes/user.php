@@ -13,6 +13,6 @@ Route::post('/login', 'Auth\LoginController@login')->name('user.login');
 Route::post('/signup', 'Auth\RegisterController@register')->name('user.signup');
 Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
 
-Route::get('/user/profile', function () {
-    return "<h1>This is the profile page!!!</h1>";
-})->name('user.profile');
+Route::get('/customer/profile', function () {
+    return "<h1>This is the customer profile page!!!</h1>";
+})->name('customer.profile');
