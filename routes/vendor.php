@@ -16,3 +16,4 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
 Route::get('/vendor/dashboard', 'VendorController@dashboard')->name('vendor.dashboard');
 Route::get('/vendor/add-product-form', 'VendorController@addProductForm')->name('vendor.add.form');
 Route::post('/vendor/add-product', 'VendorController@addProduct')->name('vendor.product.add');
+Route::get('/vendor/{vendor}/products/', 'VendorController@products')->name('vendor.products');

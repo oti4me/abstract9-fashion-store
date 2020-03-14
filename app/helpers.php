@@ -16,8 +16,6 @@ if (! function_exists('to_money')) {
      * @return string
      */
     function to_money($value) {
-        $currency = new NumberFormatter('en_US', NumberFormatter::CURRENCY);
-
-        return $currency->formatCurrency( $value , 'NGR' );
+        return number_format($value, 2, '.', ',');
     }
 }

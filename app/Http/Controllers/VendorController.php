@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductFormRequest;
+use App\Models\User;
 use App\Repositories\ProductRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
@@ -47,5 +48,16 @@ class VendorController extends Controller
         $product = ProductRepository::addProduct($productDetails);
 
         return back()->with('success', "The product '$product->title' added successfully");
+    }
+
+    /**
+     * @param Vendor $vendor
+     * @return Factory|View
+     */
+    public function products(User $vendor)
+    {
+        $products = ProductRepository::getVendorProducts($vendor->id, 10);
+
+        return view('vendor.products', compact('products'));
     }
 }

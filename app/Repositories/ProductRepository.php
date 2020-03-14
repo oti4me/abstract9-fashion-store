@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\Models\Product;
+use App\Models\ProductStatus;
 
 class ProductRepository
 {
@@ -25,5 +26,37 @@ class ProductRepository
             'quantity' => $data['quantity'],
             'vendor_id' => auth()->user()->id,
         ]);
+    }
+
+    /**
+     * Get the number of products specified in pages
+     *
+     * @param integer $size
+     * @return Product[]
+     */
+    public static function getUnapproved($size)
+    {
+        return Product::whereStatus(ProductStatus::SUBMITTED)
+            ->orderBy('id', 'DESC')
+            ->paginate($size);
+    }
+
+    /**
+     * Get the number of products specified in pagination
+     *
+     * @param integer $size
+     * @return Product[]
+     */
+    public static function getAll($size)
+    {
+        return Product::orderBy('id', 'DESC')
+            ->paginate($size);
+    }
+
+    public static function getVendorProducts($vendorId, $size)
+    {
+        return Product::whereVendorId($vendorId)
+            ->orderBy('id', 'DESC')
+            ->paginate($size);
     }
 }

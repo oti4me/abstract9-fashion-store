@@ -12,3 +12,4 @@ Route::get('admin/login', 'Auth\AdminLoginController@loginForm')->name('admin.lo
 Route::get('admin/logout', 'Auth\AdminLoginController@logout')->name('admin.logout');
 Route::post('admin/login', 'Auth\AdminLoginController@login')->name('admin.login');
 Route::get('admin/dashboard', 'AdminController@dashboard')->name('admin.dashboard');
+Route::get('admin/products', 'AdminController@products')->name('admin.products');
