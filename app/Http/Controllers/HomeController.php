@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
+use App\Repositories\ProductRepository;
 
 class HomeController extends Controller
 {
@@ -13,6 +13,8 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $products = ProductRepository::getApproved(20);
+
+        return view('home', compact('products'));
     }
 }
