@@ -42,4 +42,11 @@ class User extends Authenticatable
     public function getType() {
         return UserType::get($this->user_type);
     }
+
+    /**
+     * @return boolean
+     */
+    public function isVendor() {
+        return $this->user_type === UserType::VENDOR;
+    }
 }

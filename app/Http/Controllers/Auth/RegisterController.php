@@ -57,6 +57,6 @@ class RegisterController extends Controller
 
         $userType = strtolower($user->getType());
 
-        return redirect()->intended(route("$userType.profile"));
+        return redirect()->intended(route("$userType.dashboard"));
     }
 }

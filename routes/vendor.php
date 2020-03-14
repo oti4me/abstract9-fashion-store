@@ -13,6 +13,6 @@ Route::post('/login', 'Auth\LoginController@login')->name('user.login');
 Route::post('/signup', 'Auth\RegisterController@register')->name('user.signup');
 Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
 
-Route::get('/vendor/profile', function () {
-    return "<h1>This is the vendor profile page!!!</h1>";
-})->name('vendor.profile');
+Route::get('/vendor/dashboard', 'VendorController@dashboard')->name('vendor.dashboard');
+Route::get('/vendor/add-product-form', 'VendorController@addProductForm')->name('vendor.add.form');
+Route::post('/vendor/add-product', 'VendorController@addProduct')->name('vendor.product.add');
