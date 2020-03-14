@@ -92,4 +92,11 @@ class ProductRepository
                 'status' => ProductStatus::DENIED
             ]);
     }
+
+    public static function getApproved($size)
+    {
+        return Product::where('status', ProductStatus::APPROVED)
+            ->orderBy('id', 'DESC')
+            ->paginate($size);
+    }
 }

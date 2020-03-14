@@ -7,3 +7,6 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/08ef1e10313054735729/test_coverage)](https://codeclimate.com/github/oti4me/abstract9-fashion-store/test_coverage)
 
 
+Admin: 
+email: admin@example.com
+Password: admin123
