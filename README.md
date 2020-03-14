@@ -10,3 +10,4 @@
 Admin: 
 email: admin@example.com
 Password: admin123
+Admin Login: host/admin/login
