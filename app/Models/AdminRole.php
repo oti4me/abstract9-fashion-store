@@ -6,7 +6,7 @@ namespace App\Models;
 
 use App\Traits\InteractsWithClassConstants;
 
-class AdminRoles
+class AdminRole
 {
     use InteractsWithClassConstants;
 
