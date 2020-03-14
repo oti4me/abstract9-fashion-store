@@ -18,4 +18,11 @@ class AdminControllerTest extends TestCase
             ->get('/admin/dashboard')
             ->assertStatus(200);
     }
+
+    public function test_can_view_unapproved_products()
+    {
+        $this->actingAs(factory(Admin::class)->create(), 'admin')
+            ->get('/admin/products')
+            ->assertStatus(200);
+    }
 }

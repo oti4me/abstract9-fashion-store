@@ -12,6 +12,11 @@ class Product extends Model
      * @var array
      */
     protected $fillable = [
-        'title', 'description', 'price', 'condition', 'brand', 'vendor_id', 'quantity'
+        'title', 'description', 'price', 'condition', 'brand', 'vendor_id', 'quantity', 'status'
     ];
+
+    public function getStatus()
+    {
+        return ProductStatus::get($this->status);
+    }
 }

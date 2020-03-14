@@ -20,35 +20,9 @@
                 </div>
             </div>
 
-            <h4>Products</h4>
-            <div class="table-responsive">
-                <table class="table table-striped table-sm">
-                    <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Title</th>
-                        <th>Description</th>
-                        <th>Price</th>
-                        <th>Actions</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    @if(isset($products) && count($products))
-                        @foreach($products as $product)
-                            <tr>
-                                <td>{{ four_digits($product->id) }}</td>
-                                <td>{{ $product->title }}</td>
-                                <td>{{ $product->description }}</td>
-                                <td>{{ $product->price }}</td>
-                                <td>DELETE</td>
-                            </tr>
-                        @endforeach
-                    @else
-                        No products to display :)
-                    @endif
-                    </tbody>
-                </table>
-            </div>
+            <h5>Profile Details</h5>
+            <p>Name: {{ auth()->user()->first_name . ' ' .auth()->user()->last_name }}</p>
+            <p>Email: {{ auth()->user()->email }}</p>
         </main>
     </div>
 @endsection
