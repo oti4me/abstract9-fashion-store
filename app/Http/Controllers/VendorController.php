@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CreateProductFormRequest;
-use App\Repositories\VendorRepository;
+use App\Repositories\ProductRepository;
 use Illuminate\Contracts\View\Factory;
 use Illuminate\Http\Request;
 use Illuminate\View\View;
@@ -44,7 +44,7 @@ class VendorController extends Controller
     {
         $productDetails = $request->only(['title', 'description', 'price', 'brand', 'condition', 'quantity',]);
 
-        $product = VendorRepository::addProduct($productDetails);
+        $product = ProductRepository::addProduct($productDetails);
 
         return back()->with('success', "The product '$product->title' added successfully");
     }

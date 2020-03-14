@@ -6,7 +6,7 @@ namespace App\Repositories;
 
 use App\Models\Product;
 
-class VendorRepository
+class ProductRepository
 {
     /**
      * Create a new product instance.

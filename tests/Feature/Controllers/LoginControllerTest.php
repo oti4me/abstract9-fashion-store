@@ -31,7 +31,7 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post('/login', $loginDetails)
-            ->assertRedirect(route('customer.profile'));
+            ->assertRedirect(route('customer.dashboard'));
 
         $this->assertTrue(auth()->check());
 
@@ -55,7 +55,7 @@ class LoginControllerTest extends TestCase
         ];
 
         $this->post('/login', $loginDetails)
-            ->assertRedirect(route('vendor.profile'));
+            ->assertRedirect(route('vendor.dashboard'));
 
         $this->assertTrue(auth()->check());
 

@@ -25,7 +25,7 @@ class RegisterControllerTest extends TestCase
             ->andReturn($userFactory);
 
         $this->post(route('user.signup'), $userDetails)
-            ->assertRedirect(route('customer.profile'));
+            ->assertRedirect(route('customer.dashboard'));
 
         $this->assertTrue(auth()->check());
     }
@@ -42,7 +42,7 @@ class RegisterControllerTest extends TestCase
             ->andReturn($userFactory);
 
         $this->post(route('user.signup'), $userDetails)
-            ->assertRedirect(route('vendor.profile'));
+            ->assertRedirect(route('vendor.dashboard'));
 
         $this->assertTrue(auth()->check());
     }

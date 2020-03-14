@@ -15,4 +15,4 @@ Route::get('/logout', 'Auth\LoginController@logout')->name('user.logout');
 
 Route::get('/customer/profile', function () {
     return "<h1>This is the customer profile page!!!</h1>";
-})->name('customer.profile');
+})->name('customer.dashboard');

@@ -20,7 +20,8 @@ class CreateProductsTable extends Migration
             $table->string('brand');
             $table->integer('price');
             $table->string('condition');
-            $table->unsignedInteger('quantity');
+            $table->unsignedInteger('status')->default(1);
+            $table->unsignedInteger('quantity')->nullable();
             $table->unsignedInteger('vendor_id');
             $table->timestamps();
         });
