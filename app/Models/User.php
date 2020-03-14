@@ -39,14 +39,21 @@ class User extends Authenticatable
     /**
      * @return string|null
      */
-    public function getType() {
+    public function getType()
+    {
         return UserType::get($this->user_type);
     }
 
     /**
      * @return boolean
      */
-    public function isVendor() {
+    public function isVendor()
+    {
         return $this->user_type === UserType::VENDOR;
+    }
+
+    public function products()
+    {
+        return $this->hasMany(Product::class, 'vendor_id', 'id');
     }
 }

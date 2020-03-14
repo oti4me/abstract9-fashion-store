@@ -19,4 +19,9 @@ class Product extends Model
     {
         return ProductStatus::get($this->status);
     }
+
+    public function vendor()
+    {
+        return $this->belongsTo(User::class, 'vendor_id', 'id');
+    }
 }
