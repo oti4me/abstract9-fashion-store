@@ -39,4 +39,13 @@ class VendorControllerTest extends TestCase
             ->post(route('vendor.product.add'), $productDetails)
             ->assertSessionHas('success', 'The product \'' . $productDetails['title'] . '\' added successfully');
     }
+
+    public function test_can_view_add_products()
+    {
+        $vendor = factory(User::class)->create(['user_type' => UserType::VENDOR]);
+
+        $this->actingAs($vendor)
+            ->get(route('vendor.products', $vendor->id))
+            ->assertStatus(200);
+    }
 }
