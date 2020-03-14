@@ -10,7 +10,7 @@ class ProductStatus
 {
     use InteractsWithClassConstants;
 
-    const SUBMITTED  = 1;
-    const APPROVE    = 2;
-    const DENIED     = 3;
+    const SUBMITTED   = 1;
+    const APPROVED    = 2;
+    const DENIED      = 3;
 }

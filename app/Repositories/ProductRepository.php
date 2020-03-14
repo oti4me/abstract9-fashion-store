@@ -53,10 +53,43 @@ class ProductRepository
             ->paginate($size);
     }
 
+    /**
+     * @param $vendorId
+     * @param $size
+     * @return mixed
+     */
     public static function getVendorProducts($vendorId, $size)
     {
         return Product::whereVendorId($vendorId)
             ->orderBy('id', 'DESC')
             ->paginate($size);
+    }
+
+    /**
+     * Get the number of products specified in pagination
+     *
+     * @param $productId
+     * @return Product[]
+     */
+    public static function approve($productId)
+    {
+        return Product::find($productId)
+            ->update([
+                'status' => ProductStatus::APPROVED
+            ]);
+    }
+
+    /**
+     * Get the number of products specified in pagination
+     *
+     * @param $productId
+     * @return Product[]
+     */
+    public static function reject($productId)
+    {
+        return Product::find($productId)
+            ->update([
+                'status' => ProductStatus::DENIED
+            ]);
     }
 }
